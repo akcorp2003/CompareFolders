@@ -1,0 +1,42 @@
+﻿<Window x:Class="MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Compare Directories" Height="442.537" Width="999.627" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="509*"/>
+            <ColumnDefinition Width="8*"/>
+        </Grid.ColumnDefinitions>
+        <ListView x:Name="MissingFileList1" HorizontalAlignment="Left" Height="264" Margin="309,79,0,0" VerticalAlignment="Top" Width="153" BorderThickness="5" BorderBrush="#FF295AB2" Cursor="Hand">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Missing file" Width="150" DisplayMemberBinding="{Binding}"></GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label Content="Enter the directory path of the first folder:" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" Height="26" Width="230"/>
+        <TextBox x:Name="Folder1Path" HorizontalAlignment="Left" Height="23" Margin="10,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230"/>
+        <Label Content="Enter the directory path of the second folder:" HorizontalAlignment="Left" Margin="10,113,0,0" VerticalAlignment="Top" Height="26" Width="248"/>
+        <TextBox x:Name="Folder2Path" HorizontalAlignment="Left" Height="23" Margin="10,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230"/>
+        <TextBlock HorizontalAlignment="Left" Margin="309,9,0,0" TextWrapping="Wrap" Text="The list below shows the files missing in the second folder (but first folder has those files)." VerticalAlignment="Top" Width="175" Height="70"/>
+        <Button x:Name="Compare" Content="COMPARE!" HorizontalAlignment="Left" Margin="86,228,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.059,-0.016" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}"/>
+        <TextBlock HorizontalAlignment="Left" Margin="560,9,0,0" TextWrapping="Wrap" Text="The list below shows the files missing in the first folder (but second has those files)." VerticalAlignment="Top" Width="153"/>
+        <ListView x:Name="MissingFileList2" HorizontalAlignment="Left" Height="264" Margin="560,79,0,0" VerticalAlignment="Top" Width="153" BorderThickness="5" BorderBrush="#FF41C719" Cursor="Hand">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Missing file" Width="150" DisplayMemberBinding="{Binding}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ProgressBar x:Name="ComparingProgress" HorizontalAlignment="Left" Height="34" Margin="10,309,0,0" VerticalAlignment="Top" Width="230"/>
+        <ListView x:Name="SameFileList" HorizontalAlignment="Left" Height="264" Margin="784,79,0,0" VerticalAlignment="Top" Width="153" BorderBrush="#FFE41B1B" BorderThickness="5">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Similar Files" Width="150" DisplayMemberBinding="{Binding}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <TextBlock HorizontalAlignment="Left" Margin="784,9,0,0" TextWrapping="Wrap" Text="The list below shows the files that are in both folders." VerticalAlignment="Top" Width="153"/>
+
+    </Grid>
+</Window>
