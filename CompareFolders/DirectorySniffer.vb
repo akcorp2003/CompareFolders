@@ -5,7 +5,7 @@ Imports System.Windows.Controls
 
 Public Class DirectorySniffer
 
-    Public Function GetAllFiles(ByVal initialpath As String,
+    Public Function GetAllFiles(ByVal initialpath As String, ByVal year As String, ByVal month As String, ByVal day As String,
                                 Optional ByVal bar As Object = Nothing) As List(Of String)
         Dim resultfile_list As New List(Of String)
         Dim directory_list As New Stack(Of String)
@@ -24,7 +24,86 @@ Public Class DirectorySniffer
         While directory_list.Count > 0
             Dim curr_directory As String = directory_list.Pop()
             Try
-                resultfile_list.AddRange(Directory.GetFiles(curr_directory, "*.*"))
+                Dim dirinfo As New DirectoryInfo(curr_directory)
+                Dim filesindir As FileInfo() = dirinfo.GetFiles()
+
+                Dim myfile As FileInfo
+                For Each myfile In filesindir
+                    Dim filewritedate As Date = myfile.LastWriteTime
+                    Dim writeyear As String = Convert.ToString(filewritedate.Year)
+                    Dim writemonth As String = Convert.ToString(filewritedate.Month)
+                    Dim writeday As String = Convert.ToString(filewritedate.Day)
+
+                    REM check if the user asked to check for year
+                    If Not String.Compare(year, " ") = 0 Then
+
+                        If String.Compare(writeyear, year) = 0 Then
+                            REM check if user asked to check for month
+                            If Not String.Compare(month, " ") = 0 Then
+                                If String.Compare(month, writemonth) = 0 Then
+                                    REM check if user asked to check for date
+                                    If Not String.Compare(day, " ") = 0 Then
+                                        If String.Compare(day, writeday) = 0 Then
+                                            REM we can add the file
+                                            resultfile_list.Add(myfile.ToString)
+                                        End If
+                                    Else
+                                        REM year and month checks out, user didn't request a date
+                                        resultfile_list.Add(myfile.ToString)
+                                    End If
+
+                                End If
+                            Else
+                                REM user doesn't ask to check for month
+                                REM but may have asked to check for day
+                                If Not String.Compare(day, " ") = 0 Then
+                                    If String.Compare(day, writeday) = 0 Then
+                                        REM we can add the file, year + day are valid
+                                        resultfile_list.Add(myfile.ToString)
+                                    End If
+                                Else
+                                    REM year checks out, user didn't request a date nor month
+                                    resultfile_list.Add(myfile.ToString)
+                                End If
+
+                            End If
+                        Else
+                            REM don't add the file
+                        End If
+                    Else
+                        REM user doesn't ask for year, may have asked month and day
+                        REM check if user asked to check for month
+                        If Not String.Compare(month, " ") = 0 Then
+                            If String.Compare(month, writemonth) = 0 Then
+                                REM check if user asked to check for date
+                                If Not String.Compare(day, " ") = 0 Then
+                                    If String.Compare(day, writeday) = 0 Then
+                                        REM we can add the file
+                                        resultfile_list.Add(myfile.ToString)
+                                    End If
+                                Else
+                                    REM month checks out, user didn't request a date
+                                    resultfile_list.Add(myfile.ToString)
+                                End If
+
+                            End If
+                        Else
+                            REM user doesn't ask to check for month
+                            REM but may have asked to check for day
+                            If Not String.Compare(day, " ") = 0 Then
+                                If String.Compare(day, writeday) = 0 Then
+                                    REM we can add the file, day is valid
+                                    resultfile_list.Add(myfile.ToString)
+                                End If
+                            Else
+                                REM user doesn't ask for anything specific, just add the file
+                                resultfile_list.Add(myfile.ToString)
+                            End If
+
+                        End If
+                    End If
+
+                Next
 
                 If my_bar IsNot Nothing Then
                     my_bar.Value += my_bar.SmallChange()

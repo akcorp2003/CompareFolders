@@ -12,3 +12,7 @@ C:\Users\S06242\Documents\Visual Studio 2012\Projects\Visual Basic\CompareFolder
 C:\Users\S06242\Documents\Visual Studio 2012\Projects\Visual Basic\CompareFolders\CompareFolders\obj\Debug\CompareFolders.exe
 C:\Users\S06242\Documents\Visual Studio 2012\Projects\Visual Basic\CompareFolders\CompareFolders\obj\Debug\CompareFolders.xml
 C:\Users\S06242\Documents\Visual Studio 2012\Projects\Visual Basic\CompareFolders\CompareFolders\obj\Debug\CompareFolders.pdb
+C:\Users\S06242\Documents\Visual Studio 2012\Projects\Visual Basic\CompareFolders\CompareFolders\bin\Debug\CompareFolders.exe.manifest
+C:\Users\S06242\Documents\Visual Studio 2012\Projects\Visual Basic\CompareFolders\CompareFolders\bin\Debug\CompareFolders.application
+C:\Users\S06242\Documents\Visual Studio 2012\Projects\Visual Basic\CompareFolders\CompareFolders\obj\Debug\CompareFolders.exe.manifest
+C:\Users\S06242\Documents\Visual Studio 2012\Projects\Visual Basic\CompareFolders\CompareFolders\obj\Debug\CompareFolders.application
